@@ -3,7 +3,6 @@
 ## Learning Goals
 
 - Use Flask-SQLAlchemy to define a data model
-- Use SQLAlchemy-Serializer to serialize an object
 - Implement a Flask application that queries the database
 - Implement a Flask application that returns a JSON response
 
@@ -32,7 +31,7 @@ $ export FLASK_RUN_PORT=5555
 ## Task #1: Define a model
 
 Edit `server/models.py` to add a new model class named `Earthquake` that
-inherits from both `db.Model` and `SerializerMixin`.
+inherits from `db.Model`.
 
 Add the following attributes to the `Earthquake` model:
 

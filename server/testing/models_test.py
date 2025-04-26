@@ -1,7 +1,5 @@
 from app import app
 from server.models import db, Earthquake
-from sqlalchemy_serializer import SerializerMixin
-
 
 class TestEarthquake:
     '''Earthquake model in models.py'''
@@ -21,10 +19,9 @@ class TestEarthquake:
         assert quake.year == 1960
 
     def test_superclasses(self):
-        '''inherits from db.Model and SerializerMixin'''
+        '''inherits from db.Model'''
         quake = Earthquake()
         assert isinstance(quake, db.Model)
-        assert isinstance(quake, SerializerMixin)
 
     def test_dictionary(self):
         '''to_dict() result'''

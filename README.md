@@ -1,12 +1,29 @@
 # Flask-SQLAlchemy Lab 1
 
-## Learning Goals
+## Overview
 
-- Use Flask-SQLAlchemy to define a data model
-- Implement a Flask application that queries the database
-- Implement a Flask application that returns a JSON response
+At your new role as a junior backend developer at Seismic Analytics Co., your 
+team is building a new internal tool to manage global earthquake data. Until 
+now, the data was tracked manually in spreadsheets — causing duplicate records, 
+missing information, and delays when scientists needed to access accurate seismic 
+history. The organization needs a web-based backend that:
 
----
+* Stores earthquake data securely.
+* Allows fast queries based on event ID or magnitude.
+* Returns results in a structured JSON format so that frontend tools (maps, graphs) can dynamically visualize the data.
+
+This lab simulates a realistic project where you'll:
+
+* Define a database model for earthquakes.
+* Set up database migrations to create and maintain the database.
+* Seed the database with real sample data.
+* Write API routes to query and return earthquake information as JSON.
+
+You’ll apply the same problem-solving process used in professional development:
+
+* Define the problem and requirements.
+* Determine the technical design.
+* Develop, test, and refine your solution incrementally.
 
 ## Setup
 
@@ -28,7 +45,50 @@ $ export FLASK_APP=app.py
 $ export FLASK_RUN_PORT=5555
 ```
 
-## Task #1: Define a model
+## Instructions
+
+### Task 1: Define the Problem
+
+Seismic Analytics Co. needs a reliable backend service that stores earthquake 
+event data and provides a way to retrieve:
+
+* A specific earthquake by its ID.
+* A list of earthquakes that meet a minimum magnitude threshold.
+
+Manual spreadsheet tracking is unreliable and unscalable. The backend must 
+expose simple, efficient API endpoints that:
+
+* Query the database for earthquakes based on user input.
+* Return results in JSON format for easy frontend integration.
+
+You must ensure that:
+
+* The database is properly structured and version-controlled using migrations.
+* The application can be seeded with initial earthquake data.
+* Queries can efficiently filter large datasets.
+* The API returns clear 200 or 404 responses depending on the search results.
+
+### Task 2: Determine the Design
+
+The technical design for this application will include:
+
+* Database Model:
+  * Define an Earthquake model with appropriate fields (id, magnitude, location, year) using SQLAlchemy ORM.
+* Database Migration:
+  * Use Flask-Migrate to initialize the database and create the earthquakes table via migration scripts.
+* Seeding:
+  * A seed.py script is included to insert a realistic set of earthquake records for development and testing purposes.
+* API Routes:
+  * GET /earthquakes/int:id — Retrieve a single earthquake by ID. Return a 404 JSON error if not found.
+  * GET /earthquakes/magnitude/float:magnitude — Retrieve all earthquakes above a given magnitude, returning a count and list in JSON format.
+* Testing:
+  * Use Pytest to validate that models, migrations, and routes behave correctly.
+  * Ensure database queries are efficient and handle missing records gracefully.
+
+
+### Task 3: Develop, Test, and Refine the Code
+
+#### Step 1: Define a model
 
 Edit `server/models.py` to add a new model class named `Earthquake` that
 inherits from `db.Model`.
@@ -58,7 +118,7 @@ $ pytest testing/models_test.py
 The 4 tests should pass. If not, update your `Earthquake` model to pass the
 tests before proceeding.
 
-## Task #2: Initialize the database
+#### Step 2: Initialize the database
 
 Now it is time to create a database named `app.db` with a table named
 `earthquakes`.
@@ -157,7 +217,7 @@ Exit out of Flask shell and move on to the next task.
 >>> exit()
 ```
 
-## Task #3: Add view to get an earthquake by id
+#### Step 3: Add view to get an earthquake by id
 
 Edit `app.py` to add a view that takes one parameter, an integer that represents
 an id. The route should have the form `/earthquakes/<int:id>`.
@@ -198,7 +258,7 @@ pytest testing/app_earthquake_test.py
 
 Make sure the 4 tests pass.
 
-## Task #4: Add view to get earthquakes matching a minimum magnitude value
+#### Step 4: Add view to get earthquakes matching a minimum magnitude value
 
 Edit `app.py` to add a view that takes one parameter, a float that represents an
 magnitude. The route should have the form
@@ -251,14 +311,27 @@ pytest testing/app_magnitude_test.py
 
 Make sure the tests pass.
 
+#### Step 5: Commit and Push Git History
+
+Commit and push your solution to GitHub with meaningful commit messages.
+
+Open a PR and merge final code to main if using a feature branch.
+
+Submit your GitHub Repo on Canvas to CodeGrade.
+
+### Task 4: Document and Maintain
+
+(Optional) Best Practice documentation steps:
+* Add comments to the code to explain purpose and logic, clarifying intent and functionality of your code to other developers.
+* Update README text to reflect the functionality of the application following https://makeareadme.com. 
+  * Add screenshot of completed work included in Markdown in README.
+* Delete any stale branches on GitHub
+* Remove unnecessary/commented out code
+* If needed, update git ignore to remove sensitive data
+
 ## Submit your solution
 
-Save all files and rerun all tests:
+CodeGrade will use the same test suite as the test suite included.
 
-```console
-pytest
-```
+Once all tests are passing, commit and push your work using `git` to submit to CodeGrade through Canvas.
 
-Once all tests are passing, commit and push your work using `git` to submit.
-
----

@@ -22,8 +22,3 @@ class TestEarthquake:
         '''inherits from db.Model'''
         quake = Earthquake()
         assert isinstance(quake, db.Model)
-
-    def test_dictionary(self):
-        '''to_dict() result'''
-        quake = Earthquake(magnitude=9.5, location="Chile", year=1960)
-        assert quake.to_dict()

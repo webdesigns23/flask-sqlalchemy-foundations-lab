@@ -249,7 +249,7 @@ Test the route by typing the following within the `server` directory:
 pytest testing/app_magnitude_test.py
 ```
 
-Make sure the 3 tests pass.
+Make sure the tests pass.
 
 ## Submit your solution
 
